@@ -2,32 +2,38 @@
   {
     "title": "Email 1",
     "date": "02/20/2018",
-    "source": "solutions/rmpro/1day-sale-030118",
-    "category": "referral maker pro"
+    "source": "rmpro-1day-sale-030118",
+    "category": "rmpro"
   },
   {
     "title": "Email 2",
     "date": "02/24/2018",
-    "source": "solutions/rmpro/1day-sale-030118",
-    "category": "referral maker crm"
+    "source": "rmpro-1day-sale-030118",
+    "category": "rmpro"
   },
   {
     "title": "Email 3",
     "date": "03/01/2018",
-    "source": "solutions/rmpro/1day-sale-030118",
-    "category": "referral maker crm"
+    "source": "rmpro-1day-sale-030118",
+    "category": "rmpro"
   },
   {
     "title": "Email 4",
     "date": "03/01/2018",
-    "source": "solutions/rmpro/1day-sale-030118",
-    "category": "referral maker crm"
+    "source": "rmpro-1day-sale-030118",
+    "category": "rmpro"
   },
   {
     "title": "Email 5",
-    "date": "03/01/2018",
-    "source": "solutions/rmpro/1day-sale-030118",
-    "category": "referral maker crm"
+    "date": "02/20/2018",
+    "source": "rmpro-1day-sale-030118",
+    "category": "rmpro"
+  },
+  {
+    "title": "Email 6",
+    "date": "04/30/2018",
+    "source": "rmpro-1day-sale-030118",
+    "category": "rmpro"
   }
 ]
 

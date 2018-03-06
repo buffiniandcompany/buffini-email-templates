@@ -39,48 +39,111 @@
 <body>
 
   <!-- Header -->
-  <header style="background:#fff; color:#333;">
-    <div class="grid-container">
+  <header style="padding:2rem 1rem; background:#1f2532; color:#fff;">
+    <div class="grid-container"> 
       <div class="grid-x grid-padding-x">
-        <div class="cell">
-          <h2>Buffini &amp; Company Email Templates</h2>
+        <div class="cell auto">
+          <img src="{{root}}/assets/img/logo-buffini.jpg" width="140" />
+          <span style="font-size:1.1rem; margin:1rem;">Email Templates</span>
         </div>
       </div>
     </div>
   </header>
 
+  <!-- Main Content -->
+  <main id="mainContent" class="grid-container">
 
+    <!-- Filter - Category -->
+    <div class="grid-x grid-padding-x" style="margin:4rem auto 2rem auto;">    
+      <div class="cell large-4">
+        <label>Filter by Category:</label>
+        <select name="category" id="filterCategory">
+          <option value="" selected>All</option>
+          <option value="rmpro">Referral Maker PRO</option>
+          <option value="rmcrm">Referral Maker CRM</option>
+        </select> 
+      </div>
+      <div class="cell large-8">
+        <label>Search for:</label>
+        <input id="search" class="search" type="text" placeholder="Enter keywords" />
+      </div>
+    </div>
 
-  {{> body}}
-
-
-
-  <div class="grid-container">
-      <div class="grid-x grid-padding-x grid-padding-y small-up-1 medium-up-3 large-up-3">
-        {{#each emails}}
-        <!-- Email -->
-        <div class="cell">
-          <div class="card">
-            <div class="iframe-container">
-              <iframe src="{{root}}/{{this.source}}.html"></iframe>
-            </div>
-            <div class="card-section">
-              <h6>{{this.title}}</h6>
-              <h6><small>Published: {{this.date}}</small></h6>
-                <a href="{{root}}/{{this.source}}.otf" class="button" style="margin:0;">Download</a>
-                <a href="{{root}}/{{this.source}}.html" target="_blank" class="button hollow" style="margin:0;">Preview</a>  
-            </div>
+    <!-- Emails --> 
+    <div id="emails" class="list grid-x grid-padding-x grid-padding-y small-up-1 medium-up-2 large-up-3">
+      {{#each emails}}
+      <div class="cell">
+        <div class="card">
+          <div class="iframe-container">
+            <iframe src="{{root}}/{{this.source}}.html"></iframe>
+          </div>
+          <div class="card-section">
+            <h5 class="jsTitle"><strong>{{this.title}}</strong></h5>
+            <h6 style="margin-bottom:0;"><small>Published: {{this.date}}</small></h6>
+            <h6 class="jsCategory"><small>{{this.category}}</small></h6>
+            <a href="{{root}}/{{this.source}}.otf" class="button" style="margin:0;">Download</a>
+            <a href="{{root}}/{{this.source}}.html" target="_blank" class="button hollow" style="margin:0;">Preview</a>  
           </div>
         </div>
-        {{/each}}
+      </div>
+      {{/each}}
     </div>
-  </div>
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script> 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-  <script src="https://use.typekit.net/lbg1fkf.js"></script>
-	<script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <!-- Pagination (activated by list.js) -->
+    <ul id="pagination" class="pagination"></ul>
+
+ </main>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script> 
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
+<script type="text/javascript">
+// Search and Filtration powered by list.js library
+// assets/scripts/global/list.min.js
+function executeListJS() {
+  var options = {
+    valueNames: ['jsCategory', 'jsTitle'],
+    fuzzySearch: [{
+      searchClass: "search",
+      location: 0,
+      distance: 100,
+      threshold: 0.4,
+      multiSearch: true
+    }],
+    pagination: [{
+      name: "pagination",
+      paginationClass: "pagination",
+      innerWindow: 10,
+      outerWindow: 10,
+      left: 0,
+      right: 0
+    }],
+    page: 6
+  };
+  // Apply List JS Filtration and Search to the "#mainContent" element
+  var mainContent = new List('mainContent', options);
+  // Filter Results based on select menu changes
+  $('#filterCategory').change(function () {
+    var selection = this.value;
+    if (selection) {
+      mainContent.filter(function (item) {
+        return item.values().jsCategory.indexOf(selection) > -1;
+      });
+    } else {
+      mainContent.filter();
+    }
+  });
+  // If search returns no results, show error message
+  $('#search, select').on('change', function (e) {
+    var inputValue = $(this).val();
+    if ((inputValue.length >= 1) && ($('#emails').children().length === 0)) {
+      $('#emails').append('<h5 style="margin:1rem;">There are no results for this query. Try adjusting your search or you can <a href="javascript:window.location.reload();">Refresh this page</a>.</h5>');
+    }
+  });
+};
+executeListJS();
+</script>
+
 </body>
 </html>
 
