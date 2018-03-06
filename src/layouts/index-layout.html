@@ -1,0 +1,89 @@
+{{!-- This is the base layout for your project, and will be used on every page. --}}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css"  />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{subject}}</title>
+  <style type="text/css">
+  body {
+    background:#eee;
+  }
+  iframe
+    {
+      width: 201%;
+      height: 201%;
+      border: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: white;
+      -webkit-transform: scale(0.5);
+      transform: scale(0.5);
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      transition: opacity 0.4s ease;
+    }
+    .iframe-container {
+      position: relative;
+      height: 0;
+      padding-top: 100%;
+      overflow: hidden;
+      border:1px solid rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header style="background:#333; color:#fff;">
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="cell">
+          <h2>Buffini &amp; Company Email Templates</h2>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+  {{> body}}
+
+
+
+  <div class="grid-container">
+      <div class="grid-x grid-padding-x grid-padding-y small-up-1 medium-up-3 large-up-3">
+        {{#each emails}}
+        <!-- Email -->
+        <div class="cell">
+          <div class="card">
+            <div class="iframe-container">
+              <iframe src="{{root}}/{{this.source}}.html"></iframe>
+            </div>
+            <div class="card-section">
+              <h6>{{this.title}}</h6>
+              <h6><small>Published: {{this.date}}</small></h6>
+                <a href="{{root}}/{{this.source}}.otf" class="button" style="margin:0;">Download</a>
+                <a href="{{root}}/{{this.source}}.html" target="_blank" class="button hollow" style="margin:0;">Preview</a>  
+            </div>
+          </div>
+        </div>
+        {{/each}}
+    </div>
+  </div>
+  
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script> 
+  <script src="https://use.typekit.net/lbg1fkf.js"></script>
+	<script>try{Typekit.load({ async: true });}catch(e){}</script>
+</body>
+</html>
+
